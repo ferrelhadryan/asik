@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Redsnipper WebGIS membantu menganalisis kesesuaian lokasi budidaya ikan Kakap Merah berdasarkan faktor oseanografi.">
+  <title>Redsnipper | WebGIS Budidaya Kakap Merah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#home">Lewati ke konten utama</a>
+
+  <nav class="navbar" role="navigation" aria-label="Navigasi utama">
+    <a class="nav-logo" href="#home" aria-label="Logo Redsnipper">
+      <img src="assets/redsnipperr-logo.png" alt="Logo Redsnipper">
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-nav">
+      &#9776;
+      <span class="visually-hidden">Toggle navigasi</span>
+    </button>
+    <ul id="primary-nav" class="nav-links">
+  <li><a href="#home">Beranda</a></li>
+  <li><a href="#factors">Faktor Kesesuaian</a></li>
+  <li><a href="#about">Tentang</a></li>
+  <li><a href="#faq">FAQ</a></li> <li><a href="map.html" class="map-btn">Lihat Peta</a></li>
+</ul>
+  </nav>
+
+  <main id="main-content">
+    <section id="home" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80">
+          <source src="https://cdn.coverr.co/videos/coverr-shoal-of-fish-0251/1080p.mp4" type="video/mp4">
+          Browser Anda tidak mendukung video HTML5.
+        </video>
+      </div>
+      <div class="hero-content">
+  <img src="assets/redsnipperr-logo.png" alt="Logo Redsnipper Besar" class="hero-logo"> <h1 id="hero-heading">Budidaya Kakap Merah yang Berkelanjutan</h1>
+  <p>Temukan wilayah terbaik untuk pengembangan ikan Kakap Merah di perairan Indonesia melalui analisis faktor oseanografi dan data satelit terbaru.</p>
+  <a href="#factors" class="btn-primary">Jelajahi</a>
+</div>
+    </section>
+
+    <section id="factors" class="factors" aria-labelledby="factors-heading">
+      <h2 id="factors-heading">Faktor Penentu Kesesuaian</h2>
+      <div class="factor-grid">
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" alt="ikon suhu laut">
+          <h3>Suhu Laut</h3>
+          <p>Suhu ideal 27-30&deg;C menjaga ikan dari stres termal dan mendukung pertumbuhan.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/861/861331.png" alt="ikon klorofil-a">
+          <h3>Klorofil-a</h3>
+          <p>Nilai sedang menandakan kesuburan perairan dan ketersediaan pakan alami.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616555.png" alt="ikon salinitas">
+          <h3>Salinitas</h3>
+          <p>Kadar garam 30-35 PSU merupakan rentang optimal untuk kakap merah.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" alt="ikon arus laut">
+          <h3>Arus Laut</h3>
+          <p>Arus 0.2-0.5 m/s membantu suplai oksigen sekaligus menjaga kebersihan perairan.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3159/3159055.png" alt="ikon kedalaman">
+          <h3>Kedalaman</h3>
+          <p>Zona 10-100 meter stabil secara termal dan aman bagi keramba budidaya.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-heading">
+      <div class="about-content">
+        <h2 id="about-heading">Tentang Redsnipper</h2>
+        <p><strong>Redsnipper WebGIS</strong> menyajikan peta interaktif untuk menilai kesesuaian lokasi budidaya ikan Kakap Merah dengan menggabungkan data suhu laut, klorofil-a, salinitas, arus, dan kedalaman. Platform ini dirancang untuk membantu peneliti, pembudidaya, dan pengambil kebijakan membuat keputusan berbasis data.</p>
+        <a href="map.html" class="btn-primary">Lihat Peta Sekarang</a>
+      </div>
+    </section>
+  </main>
+
+  <section id="faq" class="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <h2 id="faq-heading">Pertanyaan Umum (FAQ)</h2>
+    <p class="faq-subheading">Temukan jawaban atas pertanyaan yang sering diajukan tentang Redsnipper WebGIS.</p>
+    
+    <div class="faq-container">
+      
+      <details class="faq-item" open> <summary>Apa itu Redsnipper WebGIS?</summary>
+        <p>
+          Redsnipper WebGIS adalah sebuah platform Sistem Informasi Geografis (SIG) berbasis web yang dirancang khusus untuk menganalisis dan memetakan kesesuaian lokasi untuk budidaya ikan Kakap Merah.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Data apa saja yang digunakan dalam analisis?</summary>
+        <p>
+          Analisis kami menggabungkan berbagai data oseanografi penting, termasuk <strong>Suhu Permukaan Laut (SST)</strong>, konsentrasi <strong>Klorofil-a</strong>, <strong>Salinitas</strong>, <strong>Arus Laut</strong>, dan data <strong>Batimetri (Kedalaman)</strong>. Data ini bersumber dari satelit dan lembaga penelitian kelautan terkemuka.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Siapa target pengguna platform ini?</summary>
+        <p>
+          Platform ini ditujukan untuk berbagai pemangku kepentingan, termasuk <strong>pembudidaya ikan</strong>, <strong>peneliti</strong> di bidang kelautan dan perikanan, <strong>investor</strong> di sektor akuakultur, serta <strong>lembaga pemerintah</strong> dan pengambil kebijakan.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Seberapa sering data diperbarui?</summary>
+        <p>
+          Frekuensi pembaruan data tergantung pada ketersediaan sumber data satelit. Sebagian besar data seperti Suhu Permukaan Laut diperbarui secara berkala (misalnya, harian atau mingguan), sementara data lain seperti batimetri lebih statis.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Apakah saya bisa mengunduh data dari peta?</summary>
+        <p>
+          Saat ini, fitur utama kami adalah visualisasi dan analisis interaktif di dalam platform. Fitur untuk mengunduh data mentah atau hasil analisis sedang dalam pengembangan dan akan diumumkan di masa mendatang.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Redsnipper | WebGIS Budidaya Kakap Merah</p>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        navLinks.classList.toggle('show');
+      });
+    }
+  </script>
+</body>
+</html>
