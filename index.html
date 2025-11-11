@@ -1,162 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<meta name="theme-color" content="#d94330" />
-	<title>Red Snipper — WebGIS Potensi Budidaya Kakap Merah</title>
-
-	<!-- Fonts & Icons -->
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-	<!-- Leaflet core -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhpmA9niMITHDYYWHaY8trwxzESMlnP2N1wk=" crossorigin="" />
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-	<!-- MarkerCluster -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-	<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster-src.js"></script>
-
-	<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Redsnipper WebGIS membantu menganalisis kesesuaian lokasi budidaya ikan Kakap Merah berdasarkan faktor oseanografi.">
+  <title>Redsnipper | WebGIS Budidaya Kakap Merah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#home">Lewati ke konten utama</a>
 
-	<!-- Intro overlay (initial welcome) - redesigned -->
-	<div id="intro" class="intro-overlay" aria-hidden="true" style="display:none">
-		<div class="intro-panel intro-split">
-			<div class="intro-left">
-				<!-- Top controls moved to floating map controls for a cleaner layout -->
-				<!-- Keep search and legend in sidebar -->
-				
-				<div class="intro-preview">
-					<!-- lightweight illustrative map preview -->
-					<svg width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-						<defs>
-							<linearGradient id="g1" x1="0" x2="1">
-								<stop offset="0" stop-color="#d94330" stop-opacity="0.9"/>
-								<stop offset="1" stop-color="#ff7a66" stop-opacity="0.8"/>
-							</linearGradient>
-						</defs>
-						<rect width="220" height="140" rx="10" fill="#07142a" />
-						<g transform="translate(12,12)">
-							<rect width="196" height="116" rx="8" fill="url(#g1)" opacity="0.18" />
-							<path d="M8 90 C50 40, 120 40, 188 80" stroke="#fff" stroke-opacity="0.06" stroke-width="14" stroke-linecap="round" fill="none"/>
-							<circle cx="40" cy="60" r="6" fill="#20c997" />
-							<circle cx="160" cy="80" r="6" fill="#d94330" />
-						</g>
-					</svg>
-				</div>
-				<div class="intro-stats">
-					<div><strong>6</strong> lokasi dianalisis</div>
-					<div><strong>3</strong> direkomendasikan</div>
-				</div>
-			</div>
-			<div class="intro-right">
-				<h2>Selamat datang di Red Snipper</h2>
-				<p class="muted">Ringkasan dan petunjuk singkat untuk menggunakan aplikasi ini.</p>
-				<div class="intro-tabs">
-					<div class="tab-controls">
-						<button class="tab-btn active" data-tab="intro">Pengantar</button>
-						<button class="tab-btn" data-tab="operasi">Pengoperasian</button>
-					</div>
-					<div class="tab-content">
-						<div class="tab-pane" data-tab="intro">
-							<h3>Tentang Red Snipper</h3>
-							<p>Red Snipper adalah WebGIS sederhana untuk membantu identifikasi lokasi yang <strong>cocok</strong>, <strong>kurang cocok</strong>, atau <strong>tidak cocok</strong> untuk budidaya ikan kakap merah. Gunakan daftar lokasi, filter, dan peta untuk eksplorasi.</p>
-						</div>
-						<div class="tab-pane" data-tab="operasi" style="display:none">
-							<h3>Cara Mengoperasikan</h3>
-							<ol>
-								<li>Klik lokasi di daftar atau di peta untuk melihat detail.</li>
-								<li>Gunakan kotak pencarian untuk menyaring lokasi.</li>
-								<li>Gunakan tombol <strong>🔍 All</strong> untuk melihat semua lokasi, dan <strong>Reset</strong> untuk kembali ke view awal.</li>
-								<li>Klik thumbnail untuk melihat gambar lebih besar.</li>
-							</ol>
-						</div>
-					</div>
-					<div style="margin-top:12px">
-						<button id="intro-start" class="btn">Mulai</button>
-						<button id="intro-dismiss" class="btn btn-ghost">Tutup</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <nav class="navbar" role="navigation" aria-label="Navigasi utama">
+    <a class="nav-logo" href="#home" aria-label="Logo Redsnipper">
+      <img src="assets/redsnipperr-logo.png" alt="Logo Redsnipper">
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-nav">
+      &#9776;
+      <span class="visually-hidden">Toggle navigasi</span>
+    </button>
+    <ul id="primary-nav" class="nav-links">
+  <li><a href="#home">Beranda</a></li>
+  <li><a href="#factors">Faktor Kesesuaian</a></li>
+  <li><a href="#about">Tentang</a></li>
+  <li><a href="#faq">FAQ</a></li> <li><a href="map.html" class="map-btn">Lihat Peta</a></li>
+</ul>
+  </nav>
 
-	<div class="app">
-		<aside class="sidebar">
-			<div class="brand">
-				<div class="brand-logo">RS</div>
-				<div>
-					<h1>Red Snipper</h1>
-					<p class="subtitle">Analisis Potensi Budidaya Kakap Merah</p>
-				</div>
-			</div>
+  <main id="main-content">
+    <section id="home" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80">
+          <source src="https://cdn.coverr.co/videos/coverr-shoal-of-fish-0251/1080p.mp4" type="video/mp4">
+          Browser Anda tidak mendukung video HTML5.
+        </video>
+      </div>
+      <div class="hero-content">
+  <img src="assets/redsnipperr-logo.png" alt="Logo Redsnipper Besar" class="hero-logo"> <h1 id="hero-heading">Budidaya Kakap Merah yang Berkelanjutan</h1>
+  <p>Temukan wilayah terbaik untuk pengembangan ikan Kakap Merah di perairan Indonesia melalui analisis faktor oseanografi dan data satelit terbaru.</p>
+  <a href="#factors" class="btn-primary">Jelajahi</a>
+</div>
+    </section>
 
-			<div class="controls">
-				<div class="controls-top">
-					<div class="btn-group">
-						<button id="btn-zoom-all" class="btn btn-ghost" title="Zoom ke semua lokasi">🔍 All</button>
-						<button id="btn-reset-view" class="btn btn-ghost" title="Reset tampilan">⟲ Reset</button>
-					</div>
-					<div class="btn-group">
-						<button id="btn-theme-toggle" class="btn" aria-pressed="false" title="Toggle tema">🌙</button>
-						<!-- Locate button: akses lokasi pengguna -->
-						<button id="btn-locate" class="btn btn-ghost" aria-pressed="false" title="Akses lokasi saya">📍</button>
-						<button id="btn-basemap-toggle" class="btn btn-ghost" aria-pressed="false" title="Ganti basemap">🗺️</button>
-					</div>
-				</div>
+    <section id="factors" class="factors" aria-labelledby="factors-heading">
+      <h2 id="factors-heading">Faktor Penentu Kesesuaian</h2>
+      <div class="factor-grid">
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" alt="ikon suhu laut">
+          <h3>Suhu Laut</h3>
+          <p>Suhu ideal 27-30&deg;C menjaga ikan dari stres termal dan mendukung pertumbuhan.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/861/861331.png" alt="ikon klorofil-a">
+          <h3>Klorofil-a</h3>
+          <p>Nilai sedang menandakan kesuburan perairan dan ketersediaan pakan alami.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616555.png" alt="ikon salinitas">
+          <h3>Salinitas</h3>
+          <p>Kadar garam 30-35 PSU merupakan rentang optimal untuk kakap merah.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" alt="ikon arus laut">
+          <h3>Arus Laut</h3>
+          <p>Arus 0.2-0.5 m/s membantu suplai oksigen sekaligus menjaga kebersihan perairan.</p>
+        </div>
+        <div class="factor-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3159/3159055.png" alt="ikon kedalaman">
+          <h3>Kedalaman</h3>
+          <p>Zona 10-100 meter stabil secara termal dan aman bagi keramba budidaya.</p>
+        </div>
+      </div>
+    </section>
 
-				<label class="search">
-					<input id="search-input" type="search" placeholder="Cari lokasi atau kata kunci..." aria-label="Cari lokasi" />
-				</label>
+    <section id="about" class="about" aria-labelledby="about-heading">
+      <div class="about-content">
+        <h2 id="about-heading">Tentang Redsnipper</h2>
+        <p><strong>Redsnipper WebGIS</strong> menyajikan peta interaktif untuk menilai kesesuaian lokasi budidaya ikan Kakap Merah dengan menggabungkan data suhu laut, klorofil-a, salinitas, arus, dan kedalaman. Platform ini dirancang untuk membantu peneliti, pembudidaya, dan pengambil kebijakan membuat keputusan berbasis data.</p>
+        <a href="map.html" class="btn-primary">Lihat Peta Sekarang</a>
+      </div>
+    </section>
+  </main>
 
-				<div class="legend" aria-hidden="false">
-					<div class="legend-title">Legends</div>
-					<div class="legend-items">
-						<div><span class="legend-dot suitable"></span> Cocok</div>
-						<div><span class="legend-dot less"></span> Kurang Cocok</div>
-						<div><span class="legend-dot unsuitable"></span> Tidak Cocok</div>
-					</div>
-				</div>
-			</div>
+  <section id="faq" class="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <h2 id="faq-heading">Pertanyaan Umum (FAQ)</h2>
+    <p class="faq-subheading">Temukan jawaban atas pertanyaan yang sering diajukan tentang Redsnipper WebGIS.</p>
+    
+    <div class="faq-container">
+      
+      <details class="faq-item" open> <summary>Apa itu Redsnipper WebGIS?</summary>
+        <p>
+          Redsnipper WebGIS adalah sebuah platform Sistem Informasi Geografis (SIG) berbasis web yang dirancang khusus untuk menganalisis dan memetakan kesesuaian lokasi untuk budidaya ikan Kakap Merah.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Data apa saja yang digunakan dalam analisis?</summary>
+        <p>
+          Analisis kami menggabungkan berbagai data oseanografi penting, termasuk <strong>Suhu Permukaan Laut (SST)</strong>, konsentrasi <strong>Klorofil-a</strong>, <strong>Salinitas</strong>, <strong>Arus Laut</strong>, dan data <strong>Batimetri (Kedalaman)</strong>. Data ini bersumber dari satelit dan lembaga penelitian kelautan terkemuka.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Siapa target pengguna platform ini?</summary>
+        <p>
+          Platform ini ditujukan untuk berbagai pemangku kepentingan, termasuk <strong>pembudidaya ikan</strong>, <strong>peneliti</strong> di bidang kelautan dan perikanan, <strong>investor</strong> di sektor akuakultur, serta <strong>lembaga pemerintah</strong> dan pengambil kebijakan.
+        </p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Seberapa sering data diperbarui?</summary>
+        <p>
+          Frekuensi pembaruan data tergantung pada ketersediaan sumber data satelit. Sebagian besar data seperti Suhu Permukaan Laut diperbarui secara berkala (misalnya, harian atau mingguan), sementara data lain seperti batimetri lebih statis.
+        </p>
+      </details>
 
-			<nav class="location-panel">
-				<h3>Wilayah Potensial</h3>
-				<ul id="location-list" role="list"></ul>
-			</nav>
+      <details class="faq-item">
+        <summary>Apakah saya bisa mengunduh data dari peta?</summary>
+        <p>
+          Saat ini, fitur utama kami adalah visualisasi dan analisis interaktif di dalam platform. Fitur untuk mengunduh data mentah atau hasil analisis sedang dalam pengembangan dan akan diumumkan di masa mendatang.
+        </p>
+      </details>
 
-			<footer class="sidebar-footer">
-				<button id="btn-export" class="btn btn-sm">Export CSV</button>
-				<div class="small">Data contoh • 2025</div>
-			</footer>
-		</aside>
+    </div>
+  </div>
+</section>
 
-		<main class="map-area">
-			<div id="map" aria-label="Peta lokasi" role="application"></div>
-			
-			<!-- spinner while tiles/markers load -->
-			<div id="spinner" class="map-spinner" aria-hidden="true" role="status">
-				<div class="spinner-ring"></div>
-				<div class="spinner-label">Memuat peta...</div>
-			</div>
-			<div id="info" class="info-card">
-				<div id="info-content">Pilih lokasi dari daftar atau peta untuk melihat detail analisis.</div>
-			</div>
-		</main>
-	</div>
+  <footer class="footer">
+    <p>&copy; 2025 Redsnipper | WebGIS Budidaya Kakap Merah</p>
+  </footer>
 
-	<!-- Modal (hidden by default) -->
-	<div id="modal" class="modal" aria-hidden="true">
-		<div class="modal-panel">
-			<button id="modal-close" class="modal-close">✕</button>
-			<div id="modal-body"></div>
-		</div>
-	</div>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-	<!-- Data & App script -->
-	<script src="data.js"></script>
-	<script src="script.js"></script>
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        navLinks.classList.toggle('show');
+      });
+    }
+  </script>
 </body>
 </html>
